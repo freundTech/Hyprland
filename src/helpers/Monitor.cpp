@@ -5,10 +5,8 @@
 void CMonitor::onConnect(bool noRule) {
     hyprListener_monitorDestroy.removeCallback();
     hyprListener_monitorFrame.removeCallback();
-    hyprListener_monitorStateRequest.removeCallback();
     hyprListener_monitorFrame.initCallback(&output->events.frame, &Events::listener_monitorFrame, this);
     hyprListener_monitorDestroy.initCallback(&output->events.destroy, &Events::listener_monitorDestroy, this);
-    hyprListener_monitorStateRequest.initCallback(&output->events.request_state, &Events::listener_monitorStateRequest, this);
 
     if (m_bEnabled) {
         wlr_output_enable(output, 1);
@@ -207,7 +205,7 @@ void CMonitor::onDisconnect() {
     if (!BACKUPMON) {
         Debug::log(WARN, "Unplugged last monitor, entering an unsafe state. Good luck my friend.");
 
-        hyprListener_monitorStateRequest.removeCallback();
+        hyprListener_monitorMode.removeCallback();
         hyprListener_monitorDestroy.removeCallback();
 
         g_pCompositor->m_bUnsafeState = true;

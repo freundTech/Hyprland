@@ -96,7 +96,6 @@ namespace Events {
     // Monitor part 2 the sequel
     DYNLISTENFUNC(monitorFrame);
     DYNLISTENFUNC(monitorDestroy);
-    DYNLISTENFUNC(monitorStateRequest);
 
     // XWayland
     LISTENER(readyXWayland);
